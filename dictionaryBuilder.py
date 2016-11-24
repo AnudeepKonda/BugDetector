@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# DESCRIPTION
+# This script will be used to create a dictionary of tokens
 # Lance Simmons, November 2016
 
 import csv     # imports the csv module

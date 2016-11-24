@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# DESCRIPTION
+# Parser for entropy file. Looks up and records source lines, tokens, entropies, and bug flags.
 # Lance Simmons, November 2016
 
 import csv     # imports the csv module
