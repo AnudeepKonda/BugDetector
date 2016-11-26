@@ -12,7 +12,7 @@ import time
 
 # Defines which tokens are considered 'rare'
 # Tokens occuring this many times or fewer will be replaced with the rare token id
-rareTokenThreshold = 4
+rareTokenThreshold = 200
 
 def main():
 
@@ -32,7 +32,7 @@ def main():
             # if token in dictionary, add 1 to relevant index
             # otherwise, add a new entry and set it to 1
 
-    print("Processing tokens...")
+    print "Processing tokens..."
     iterator = 0
     for line in fileHandler:
         tokens = line.split()
@@ -43,8 +43,9 @@ def main():
                 tokenDict[token] = 1
 
         iterator += 1
-        if (iterator % 10000) == 0:
-            print "Processing line: " + str(iterator) + "\r",
+        if (iterator % 50000) == 0:
+            print "Processing token line: " + str(iterator) + "\r",
+            sys.stdout.flush()
     
     print "Processing token line: " + str(iterator)
     fileHandler.close()
@@ -75,15 +76,21 @@ def main():
 
     # start printing out tokens and their counts
     # rare tokens are tallied up and added at the end
+    totalTokensInFile = 0
     totalRareTokens = 0
     for item in splitlines:
+        totalTokensInFile += int(item[1])
         if (int(item[1]) <= rareTokenThreshold):
             item[0] = "<RARE_TOKEN>"
             totalRareTokens += int(item[1])
         else:
             fileHandler.write(item[0] + " " + item[1] + "\n")
 
-    fileHandler.write("<RARE_TOKEN>" + " " + str(totalRareTokens) + "\n")    
+    fileHandler.write("<RARE_TOKEN> " + str(totalRareTokens) + "\n")
+
+    # Now, write out total tokens collected
+    fileHandler.write("\n<TOTAL_TOKENS_IN_FILE> " + str(totalTokensInFile) + "\n")
+
     fileHandler.close()
 
 
