@@ -78,18 +78,32 @@ def main():
     # rare tokens are tallied up and added at the end
     totalTokensInFile = 0
     totalRareTokens = 0
+    uniquesConvertedToRares = 0
     for item in splitlines:
         totalTokensInFile += int(item[1])
         if (int(item[1]) <= rareTokenThreshold):
             item[0] = "<RARE_TOKEN>"
             totalRareTokens += int(item[1])
+            uniquesConvertedToRares += 1
         else:
             fileHandler.write(item[0] + " " + item[1] + "\n")
 
     fileHandler.write("<RARE_TOKEN> " + str(totalRareTokens) + "\n")
+    fileHandler.close()
+
+
+    # data file, currently ununsed
+    print "Writing token stats to tokenStats.txt file"
+    fileHandler = open('tokenStats.txt', 'w')
 
     # Now, write out total tokens collected
-    fileHandler.write("\n<TOTAL_TOKENS_IN_FILE> " + str(totalTokensInFile) + "\n")
+    fileHandler.write("<RARE_TOKEN> " + str(totalRareTokens) + "\n")
+    fileHandler.write("<TOTAL_TOKENS_IN_FILE> " + str(totalTokensInFile) + "\n")
+    fileHandler.write("<UNIQUE_TOKENS_IN_FILE> " + str(len(tokenDict)) + "\n")
+
+    # This represents the number of distinct tokens we're considering after rare tokens
+    # have been coalesced to the rare token tag
+    fileHandler.write("<UNIQUE_TOKENS_IN_FILE_POST_REPLACING_RARES> " + str(len(splitlines) - uniquesConvertedToRares + 1) + "\n")
 
     fileHandler.close()
 
