@@ -1,6 +1,9 @@
 #!/usr/bin/python
 #
-# This script will be used to pre-process a file, replacing rare tokens with rare token flag
+# DEPRECATED? I don't remember if this is needed.
+# I think dictionaryBuilder covers this functionality already
+#
+# This script can be used to pre-process a file, replacing rare tokens with rare token flag
 # Assumes input: unprocessedTokensFile, dictionaryFile
 #
 # Lance Simmons, November 2016
@@ -11,10 +14,6 @@ import time
 
 
 ## PARAMETERS
-
-# Defines which tokens are considered 'rare'
-# Tokens occuring this many times or fewer will be replaced with the rare token id
-rareTokenFlag = "<RARE_TOKEN>"
 
 def main():
 

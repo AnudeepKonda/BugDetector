@@ -13,7 +13,7 @@ import time
 
 # Defines which tokens are considered 'rare'
 # Tokens occuring this many times or fewer will be replaced with the rare token id
-rareTokenThreshold = 200
+rareTokenThreshold = 20
 
 def main():
 
@@ -111,6 +111,52 @@ def main():
     fileHandler.write("<UNIQUE_TOKENS_IN_FILE_POST_REPLACING_RARES> " + str(len(splitlines) - uniquesConvertedToRares + 1) + "\n")
 
     fileHandler.close()
+
+
+    ## Now, filter all rare tokens out of file
+
+    # open file of tokens
+    fileHandlerTokens = open(sys.argv[1], 'r')
+
+    # open file of dictionary
+    fileHandlerTokenDictionary = open(dictionaryName, 'r')
+
+    # Read lines into dictionary
+    tokensDictionary = {}
+
+    for line in fileHandlerTokenDictionary:
+        splitLine = line.split()
+
+        tempKey = splitLine[0]
+        tempValue = splitLine[1]
+
+        tokensDictionary[tempKey] = tempValue
+
+    fileHandlerTokenDictionary.close()
+
+
+    # Read all the lines from file
+    linesFromFile = fileHandlerTokens.readlines()
+    fileHandlerTokens.close()
+
+    # Create a file handler for output file
+    fileHandlerOutput = open(sys.argv[1], 'w')
+
+    for line in linesFromFile:
+        splitLine = line.split()
+        for element in splitLine:
+            if (element not in tokensDictionary) and (element not in ["<START_FILE>", "<END_FILE>", "</a>", "<a>"]):
+                element = "<RARE_TOKEN>"
+            fileHandlerOutput.write(element + " ")
+        fileHandlerOutput.write("\n")
+
+    print("File: " + str(sys.argv[1]) + " has had rare tokens replaced.")
+    exit()
+
+
+
+
+
 
 
 if __name__ == "__main__":

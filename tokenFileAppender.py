@@ -67,7 +67,7 @@ def main():
             fileHandlerTrain.write(line)
         fileHandlerTemp.close()
 
-        fileHandlerTest.write(END_FILE_TOKEN + "\n")
+        fileHandlerTrain.write(END_FILE_TOKEN + "\n")
 
     fileHandlerTrain.close()
 
@@ -89,8 +89,8 @@ def main():
 
 
     # Open files for appending names of files in train, test sets
-    fileHandlerTrainFileName = open("trainSetFileNames.txt", 'w')
-    fileHandlerTestFileName = open("testSetFileNames.txt", 'w')
+    fileHandlerTrainFileName = open("trainSet_FileNames.txt", 'w')
+    fileHandlerTestFileName = open("testSet_FileNames.txt", 'w')
 
     for fileName in trainSet:
         fileHandlerTrainFileName.write(fileName + "\n")

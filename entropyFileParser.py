@@ -1,5 +1,7 @@
 #!/usr/bin/python
 #
+# THIS SCRIPT IS DEPRECATED. USE OTHER SCRIPTS.
+#
 # Parser for entropy file.
 # Looks up and records source lines, tokens, entropies, and bug flags.
 #
