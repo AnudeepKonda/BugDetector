@@ -1,11 +1,12 @@
 #!/usr/bin/python
 #
 # This script will be used to pre-process a file, replacing rare tokens with rare token flag
+# Assumes input: unprocessedTokensFile, dictionaryFile
 #
 # Lance Simmons, November 2016
 
-import csv     # imports the csv module
-import sys      # imports the sys module
+import csv
+import sys
 import time
 
 
@@ -36,8 +37,6 @@ def main():
     tokensDictionary = {}
 
     for line in fileHandlerTokenDictionary:
-        print "LINE:"
-        print line,
         splitLine = line.split()
 
         tempKey = splitLine[0]
@@ -47,11 +46,15 @@ def main():
 
     fileHandlerTokenDictionary.close()
 
+
+    # Read all the lines from file
+    linesFromFile = fileHandlerTokens.readlines()
+    fileHandlerTokens.close()
+
     # Create a file handler for output file
-    fileHandlerOutput = open("tokenLinesRaresReplaced.txt", 'w')
+    fileHandlerOutput = open(sys.argv[1], 'w')
 
-
-    for line in fileHandlerTokens:
+    for line in linesFromFile:
         splitLine = line.split()
         for element in splitLine:
             if element not in tokensDictionary:
@@ -59,6 +62,7 @@ def main():
             fileHandlerOutput.write(element + " ")
         fileHandlerOutput.write("\n")
 
+    print("File: " + str(sys.argv[1]) + " has had rare tokens replaced.")
     exit()
 
 if __name__ == "__main__":

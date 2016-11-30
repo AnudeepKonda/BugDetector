@@ -27,6 +27,12 @@ def main():
         print "Error: specify path to token file as argument"
         exit()
 
+    # Set dictionary name based on token file name
+    dictionaryName = sys.argv[1]
+    dictionaryName = dictionaryName.split(".")[0]
+    statsFileName = dictionaryName + "_Stats.txt"
+    dictionaryName += "_Dictionary.txt"
+
     print "Processing tokens..."
     iterator = 0
     # for line in reader obj
@@ -51,20 +57,20 @@ def main():
 
 
     # once dictionary is assembled, write it to file
-    print "Writing results to tokenCounts.txt file"
-    fileHandler = open('tokenCounts.txt', 'w')
+    print "Writing results to dictionary file"
+    fileHandler = open(dictionaryName, 'w')
     for x in tokenDict:
         lineToPrint = str(x) + " " + str(tokenDict[x]) + "\n"
         fileHandler.write(lineToPrint)
     fileHandler.close()
 
     # read in all lines into a list
-    fileHandler = open('tokenCounts.txt', 'r')
+    fileHandler = open(dictionaryName, 'r')
     lines = fileHandler.readlines()
     fileHandler.close()
 
     # sort those lines
-    fileHandler = open('tokenCounts.txt', 'w')
+    fileHandler = open(dictionaryName, 'w')
     lines.sort()
 
     # split lines into tokens and counts
@@ -92,8 +98,8 @@ def main():
 
 
     # data file, currently ununsed
-    print "Writing token stats to tokenStats.txt file"
-    fileHandler = open('tokenStats.txt', 'w')
+    print "Writing token stats to stats file"
+    fileHandler = open(statsFileName, 'w')
 
     # Now, write out total tokens collected
     fileHandler.write("<RARE_TOKEN> " + str(totalRareTokens) + "\n")
