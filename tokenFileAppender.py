@@ -1,7 +1,9 @@
+#!/usr/bin/python
 #
 # Search a directory and append all files with a
 # given extension. Note that this was written in
-# Windows, and is probably not compatible with Unix.
+# Windows, and is possibly not compatible with Unix.
+#
 # Lance Simmons, December 2016
 
 import os
@@ -10,6 +12,12 @@ import random
 
 # Seed rng
 random.seed()
+
+## PARAMETERS
+
+START_FILE_TOKEN = "<START_FILE>"
+END_FILE_TOKEN = "<END_FILE>"
+
 
 def main():
     # User specifies directory to find token files in with command line arg
@@ -47,24 +55,36 @@ def main():
     fileHandlerTrain = open("trainSet.txt", 'w')
     fileHandlerTest = open("testSet.txt", 'w')
 
+
+
     # Writing training set file
     print("Writing training set file")
     for fileName in trainSet:
-        fileHandlerTemp = open(directoryName + "/" + fileName, "r")
+        
+        fileHandlerTrain.write(START_FILE_TOKEN + "\n")
 
+        fileHandlerTemp = open(directoryName + "/" + fileName, "r")
         for line in fileHandlerTemp:
             fileHandlerTrain.write(line)
         fileHandlerTemp.close()
+
+        fileHandlerTest.write(END_FILE_TOKEN + "\n")
+
     fileHandlerTrain.close()
 
     # Writing testing set file
     print("Writing testing set file")
     for fileName in testSet:
-        fileHandlerTemp = open(directoryName + "/" + fileName, "r")
 
+        fileHandlerTest.write(START_FILE_TOKEN + "\n")
+
+        fileHandlerTemp = open(directoryName + "/" + fileName, "r")
         for line in fileHandlerTemp:
             fileHandlerTest.write(line)
         fileHandlerTemp.close()
+
+        fileHandlerTest.write(END_FILE_TOKEN + "\n")
+
     fileHandlerTest.close()
 
 

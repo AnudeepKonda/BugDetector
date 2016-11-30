@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #
 # This script will be used to pre-process a file, replacing rare tokens with rare token flag
+#
 # Lance Simmons, November 2016
 
 import csv     # imports the csv module
