@@ -12,9 +12,15 @@ from tensorflow.python.ops import rnn
 
 def main():
 
+    if(len(sys.argv) != 4):
+        print("Args: training_set, testing_set, token_dictionary")
+        exit()
+
+
+
     # Read in all required files
     print("Reading in dictionary file...")
-    fp = open("tokens.txt", "r")
+    fp = open(sys.argv[3], "r")
     data = fp.readlines()
     dic = {}
     ctr = 0
@@ -28,13 +34,13 @@ def main():
 
 
     print("Reading in training file...")
-    fp = open("tokenlines_100.txt","r")
+    fp = open(sys.argv[1],"r")
     trainingFileLines = fp.readlines()
     n = len(trainingFileLines)
 
 
     print("Reading in testing file...")
-    fp32 = open("tokenlinetest.txt", "r")
+    fp32 = open(sys.argv[2], "r")
     testingFileLines = fp32.readlines()
     n32 = len(testingFileLines)
 
@@ -108,12 +114,10 @@ def main():
 
             for epoch in range(hm_epochs):
                 
-                print("Epoch: " + str(epoch))
-
                 epoch_loss = 0
                 for i in range(len(trainingFileLines)):
-                    if (i % 50 == 0):
-                        print("Training: [" + str(i) + "/" + str(len(trainingFileLines)) + "] [" + ("%.2f" % ((i*1.0)/(len(trainingFileLines)*1.0)*100)) + "%]", end="\r")
+                    if (i % 100 == 0):
+                        print("Epoch " + str(epoch) + " Training: [" + str(i) + "/" + str(len(trainingFileLines)) + "] [" + ("%.2f" % ((i*1.0)/(len(trainingFileLines)*1.0)*100)) + "%]", end="\r")
                         sys.stdout.flush()
 
                     epoch_x, epoch_y = getbatch(i)
@@ -122,7 +126,7 @@ def main():
                     _, c = sess.run([optimizer, cost], feed_dict={x: epoch_x, y: epoch_y})
                     epoch_loss += c
                     #print (i)
-                print('\nEpoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss/1000)
+                print('Epoch [', epoch, '/', hm_epochs, '] completed.         Loss:', epoch_loss/1000)
 
             for i in range(len(testingFileLines)):
                     if (i % 50 == 0):

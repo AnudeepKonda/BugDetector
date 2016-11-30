@@ -10,13 +10,6 @@ import sys      # imports the sys module
 import time
 
 
-## PARAMETERS
-
-# Defines which tokens are considered 'rare'
-# Tokens occuring this many times or fewer will be replaced with the rare token id
-# Set to 0 to disable this feature
-rareTokenThreshold = 0
-
 def main():
 
     # create python dictionary
@@ -28,6 +21,19 @@ def main():
     except:
         print "Error: specify path to token file as argument"
         exit()
+
+    # Defines which tokens are considered 'rare'
+    # Tokens occuring this many times or fewer will be replaced with the rare token id
+    # Set to 0 to disable this feature
+    rareTokenThreshold = 0
+
+    if len(sys.argv) == 3:
+        print("User set rareTokenThreshold: " + sys.argv[2])
+        # User can specify alternate rareTokenThreshold
+        rareTokenThreshold = int(sys.argv[2])
+    else:
+        print("rareTokenThreshold defaults to 0.")
+
 
     # Set dictionary name based on token file name
     dictionaryName = sys.argv[1]

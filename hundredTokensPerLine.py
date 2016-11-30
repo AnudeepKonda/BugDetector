@@ -1,6 +1,8 @@
 #!/usr/bin/python
 #
 # This script will be used to produce files with 100 tokens on each line.
+#
+# FIXME: I think this is failing with multiple input files? Not always 100 tokens on each line
 
 from __future__ import print_function
 import sys, os
@@ -32,7 +34,7 @@ def main():
             if (count % 500000 == 0):
                 print( "Processed tokens: " + str(count) + "\r", end = "")
                 sys.stdout.flush()
-            for i in range(0, 100):
+            for i in range(0, 101):
                 if data[count+i].find("\n") != -1:
                     buf.append(data[count+i][:-1])
                 else:
