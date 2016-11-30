@@ -47,18 +47,6 @@ def main():
 
     fileHandlerTokenDictionary.close()
 
-    # for element in tokensDictionary:
-    #     print element,
-    #     print " ",
-    #     print tokensDictionary[element]
-
-
-    # if "<RARE_TOKEN>" in tokensDictionary:
-    #     print "Oh good!"
-    # if "INVALID TOKEN" in tokensDictionary:
-    #     print "Error"
-
-
     # Create a file handler for output file
     fileHandlerOutput = open("tokenLinesRaresReplaced.txt", 'w')
 
@@ -72,8 +60,6 @@ def main():
         fileHandlerOutput.write("\n")
 
     exit()
-
-
 
 if __name__ == "__main__":
     main()

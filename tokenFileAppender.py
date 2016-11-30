@@ -56,7 +56,6 @@ def main():
     fileHandlerTest = open("testSet.txt", 'w')
 
 
-
     # Writing training set file
     print("Writing training set file")
     for fileName in trainSet:
@@ -71,6 +70,7 @@ def main():
         fileHandlerTest.write(END_FILE_TOKEN + "\n")
 
     fileHandlerTrain.close()
+
 
     # Writing testing set file
     print("Writing testing set file")

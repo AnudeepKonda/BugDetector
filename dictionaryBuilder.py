@@ -20,26 +20,24 @@ def main():
     # create python dictionary
     tokenDict = {}
 
-    # open file of tokens
+    # open file of tokens to read from
     try:
         fileHandler = open(sys.argv[1], 'r')
     except:
         print "Error: specify path to token file as argument"
         exit()
 
-    # open file of tokens to read from
-    # for line in reader obj
-        # for tokens in line
-            # if token in dictionary, add 1 to relevant index
-            # otherwise, add a new entry and set it to 1
-
     print "Processing tokens..."
     iterator = 0
+    # for line in reader obj
     for line in fileHandler:
         tokens = line.split()
+        # for tokens in line
         for token in tokens:
+            # if token in dictionary, add 1 to relevant index
             if token in tokenDict:               
                 tokenDict[token] += 1
+            # otherwise, add a new entry and set it to 1
             else:
                 tokenDict[token] = 1
 
