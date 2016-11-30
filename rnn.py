@@ -9,13 +9,11 @@ import tensorflow as tf
 from tensorflow.python.ops import rnn_cell
 from tensorflow.python.ops import rnn
 
-
 def main():
 
     if(len(sys.argv) != 4):
         print("Args: training_set, testing_set, token_dictionary")
         exit()
-
 
 
     # Read in all required files
@@ -115,9 +113,11 @@ def main():
             for epoch in range(hm_epochs):
                 
                 epoch_loss = 0
+
                 for i in range(len(trainingFileLines)):
-                    if (i % 100 == 0):
-                        print("Epoch " + str(epoch) + " Training: [" + str(i) + "/" + str(len(trainingFileLines)) + "] [" + ("%.2f" % ((i*1.0)/(len(trainingFileLines)*1.0)*100)) + "%]", end="\r")
+                    if (i % 10 == 0):
+                        print("Epoch " + str(epoch) + " Training: [" + str(i) + "/" + str(len(trainingFileLines)) + "] [" + ("%.2f" % ((i*1.0)/(len(trainingFileLines)*1.0)*100)) + "%] ", end="\r")
+                        spinner = spinSpinner(spinner)
                         sys.stdout.flush()
 
                     epoch_x, epoch_y = getbatch(i)
@@ -139,7 +139,7 @@ def main():
             correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
 
             accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
-            print('Accuracy:',accuracy.eval({x:epoch_xx, y:epoch_yy}))
+            print('\nAccuracy:',accuracy.eval({x:epoch_xx, y:epoch_yy}))
 
     train_neural_network(x)
 
