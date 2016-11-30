@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #
-# This script will be used to create a dictionary of tokens
+# This script will be used to create a dictionary of tokens and a stats file.
+# Also strips rare tokens.
 #
 # Lance Simmons, November 2016
 
@@ -13,7 +14,8 @@ import time
 
 # Defines which tokens are considered 'rare'
 # Tokens occuring this many times or fewer will be replaced with the rare token id
-rareTokenThreshold = 20
+# Set to 0 to disable this feature
+rareTokenThreshold = 0
 
 def main():
 
@@ -103,6 +105,7 @@ def main():
 
     # Now, write out total tokens collected
     fileHandler.write("<RARE_TOKEN> " + str(totalRareTokens) + "\n")
+    fileHandler.write("<RARE_TOKEN_THRESHOLD> " + str(rareTokenThreshold) + "\n")
     fileHandler.write("<TOTAL_TOKENS_IN_FILE> " + str(totalTokensInFile) + "\n")
     fileHandler.write("<UNIQUE_TOKENS_IN_FILE> " + str(len(tokenDict)) + "\n")
 
