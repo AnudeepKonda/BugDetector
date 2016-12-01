@@ -1,8 +1,6 @@
 #!/usr/bin/python
 #
-# This script will be used to produce files with 100 tokens on each line.
-#
-# FIXME: I think this is failing with multiple input files? Not always 100 tokens on each line
+# This script will be used to produce files with set number of tokens on each line.
 
 from __future__ import print_function
 import sys, os
