@@ -7,6 +7,9 @@
 from __future__ import print_function
 import sys, os
 
+# PARAMETERS
+TOKENS_PER_LINE = 10
+
 def main():
 
     if(len(sys.argv) < 2):
@@ -30,16 +33,16 @@ def main():
 
         fp2 = open(sys.argv[argumentNumber], "w")
         count = 0
-        while count < total_tokens-100:
+        while count < total_tokens-TOKENS_PER_LINE:
             if (count % 500000 == 0):
                 print( "Processed tokens: " + str(count) + "\r", end = "")
                 sys.stdout.flush()
-            for i in range(0, 101):
+            for i in range(0, (TOKENS_PER_LINE + 1)):
                 if data[count+i].find("\n") != -1:
                     buf.append(data[count+i][:-1])
                 else:
                     buf.append(data[count+i])
-            count = count + 100
+            count = count + TOKENS_PER_LINE
             string_to_write = ' '.join(buf)
             fp2.write(string_to_write+'\n')
             #print(count)

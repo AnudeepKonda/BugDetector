@@ -64,7 +64,10 @@ def main():
 
         fileHandlerTemp = open(directoryName + "/" + fileName, "r")
         for line in fileHandlerTemp:
-            fileHandlerTrain.write(line)
+            # Delete consecutive and trailing whitespace
+            line =' '.join(line.split())
+            # Write line with newline char that was just stripped
+            fileHandlerTrain.write(line + "\n")
         fileHandlerTemp.close()
 
         fileHandlerTrain.write(END_FILE_TOKEN + "\n")
@@ -80,7 +83,10 @@ def main():
 
         fileHandlerTemp = open(directoryName + "/" + fileName, "r")
         for line in fileHandlerTemp:
-            fileHandlerTest.write(line)
+            # Delete consecutive and trailing whitespace
+            line =' '.join(line.split())
+            # Write line with newline char that was just stripped
+            fileHandlerTest.write(line + "\n")
         fileHandlerTemp.close()
 
         fileHandlerTest.write(END_FILE_TOKEN + "\n")
