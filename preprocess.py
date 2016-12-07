@@ -46,6 +46,10 @@ def main():
     # for line in reader obj
     for line in fileHandler:
         tokens = line.split()
+        # Strip the last token from the line if it's an entropy score
+        if tokens[0] not in ["<START_FILE>", "<END_FILE>"]:
+            tokens = tokens[:-1]
+        
         # for tokens in line
         for token in tokens:
             # if token in dictionary, add 1 to relevant index
@@ -94,7 +98,7 @@ def main():
     uniquesConvertedToRares = 0
     for item in splitlines:
         totalTokensInFile += int(item[1])
-        if (int(item[1]) <= rareTokenThreshold):
+        if ((int(item[1]) <= rareTokenThreshold) and (item[0] not in ["<START_FILE>", "<END_FILE>", "</a>", "<a>"])):
             item[0] = "<RARE_TOKEN>"
             totalRareTokens += int(item[1])
             uniquesConvertedToRares += 1
@@ -123,7 +127,6 @@ def main():
 
 
     ## Now, filter all rare tokens out of file
-
     # open file of tokens
     fileHandlerTokens = open(sys.argv[1], 'r')
 
@@ -149,17 +152,27 @@ def main():
     fileHandlerTokens.close()
 
     # Create a file handler for output file
-    fileHandlerOutput = open(sys.argv[1], 'w')
+    
+    filteredFileName = sys.argv[1][:-4] + "_NoRares.txt"
+    filteredFileName2 = sys.argv[1][:-4] + "_NoRaresOrEntropies.txt"
+    
+    fileHandlerOutput = open(filteredFileName, 'w')
+    fileHandlerOutput2 = open(filteredFileName2, 'w')
 
     for line in linesFromFile:
         splitLine = line.split()
-        for element in splitLine:
+        for element in splitLine[:-1]:
             if (element not in tokensDictionary) and (element not in ["<START_FILE>", "<END_FILE>", "</a>", "<a>"]):
                 element = "<RARE_TOKEN>"
             fileHandlerOutput.write(element + " ")
-        fileHandlerOutput.write("\n")
+            fileHandlerOutput2.write(element + " ")
+        fileHandlerOutput.write(splitLine[-1] + "\n")
+        if splitLine[-1] in ["<START_FILE>", "<END_FILE>"]:
+            fileHandlerOutput2.write(splitLine[-1] + "\n")
+        else:
+            fileHandlerOutput2.write("\n")
 
-    print("File: " + str(sys.argv[1]) + " has had rare tokens replaced.")
+    print("File: " + filteredFileName + " has had rare tokens replaced.")
     exit()
 
 
