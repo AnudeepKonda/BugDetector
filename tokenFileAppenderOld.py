@@ -1,5 +1,7 @@
 #!/usr/bin/python
 #
+# DEPRECATED. Use revised version
+#
 # Search a directory and append all files with a
 # given extension. Note that this was written in
 # Windows, and is possibly not compatible with Unix.
