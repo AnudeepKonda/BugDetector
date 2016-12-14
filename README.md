@@ -1,6 +1,6 @@
 # rnnFaultFinder
 
-Place a directory containing token files in root dir with these scripts.
+Place a directory containing token (entropy) files in root dir with these scripts.
 
 Execute:
 tokenFileAppender.py dir_name
