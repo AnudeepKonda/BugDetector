@@ -20,6 +20,7 @@ preprocess.py *training_file.txt* threshold
 
     TRAINFILE.txt: The file that has token sequences for training
     TESTFILE.txt: The file that has token sequences for testing, i.e. lines for which entropy is to generated
+    DICTIONARY.txt: The file representing occurences of each token.
 
     No_Of_Epochs: an integer indicating the number of training epochs
 
@@ -40,7 +41,7 @@ preprocess.py *training_file.txt* threshold
     USAGE: python3 classifier_data_gen.py
 
 
-    Description: This file reads in the final_entropies.txt created by earlier file. It trains a binary classifier on 80% of data in final_entropies.txt. This classifier tries to classify a given entropy value into two categories: bug and not bug. This file outputs the trained classifier and saves in under the name 'classifier.h5'
+    Description: This file reads in the final_entropies.txt created by earlier file. It trains a binary classifier on 80% of data in final_entropies.txt. This classifier tries to classify a given probability value into two categories: bug and not bug. This file outputs the trained classifier and saves in under the name 'classifier.h5'
 
 4. kerasImplementation/prediction.py
 
