@@ -46,8 +46,8 @@ def main():
         # print(tokenFilePaths[x].replace("\\", "/"))
         tokenFilePaths[x] = tokenFilePaths[x].replace("\\", "/")
     
-    for entry in tokenFilePaths:
-        print(entry)
+    #for entry in tokenFilePaths:
+    #    print(entry)
     # time.sleep(3)
     # exit()
 
@@ -161,10 +161,10 @@ def main():
     #         print("\n")
 
 
-    for entry in codeTokenPaths:
-        print(entry)
-    print("\n\n----\n\n")
-    time.sleep(1)
+    #for entry in codeTokenPaths:
+    #    print(entry)
+    #print("\n\n----\n\n")
+    #time.sleep(1)
 
 
 
@@ -207,7 +207,7 @@ def main():
             lineLookupFlag = True
 
 
-        fileHandlerWriter.write("<START_FILE>\n")
+        fileHandlerWriter.write("<START_FILE> 0\n")
         for lineIndex in range(0,len(tokenLines)):
             tempLine = ""
             tempLine = tempLine + tokenLines[lineIndex]
@@ -224,7 +224,7 @@ def main():
                 # No match, so assume the line is not buggy (we have no information about it)
                 tempLine = tempLine + " 0"
             fileHandlerWriter.write(tempLine + "\n")
-        fileHandlerWriter.write("<END_FILE>\n")
+        fileHandlerWriter.write("<END_FILE> 0\n")
 
 
 
@@ -247,7 +247,7 @@ def main():
             lineLookupFlag = True
 
 
-        fileHandlerWriter.write("<START_FILE>\n")
+        fileHandlerWriter.write("<START_FILE> 0\n")
         for lineIndex in range(0,len(tokenLines)):
             tempLine = ""
             tempLine = tempLine + tokenLines[lineIndex]
@@ -264,7 +264,11 @@ def main():
                 # No match, so assume the line is not buggy (we have no information about it)
                 tempLine = tempLine + " 0"
             fileHandlerWriter.write(tempLine + "\n")
-        fileHandlerWriter.write("<END_FILE>\n")
+        fileHandlerWriter.write("<END_FILE> 0\n")
+
+
+    print("Generated Training and Test set files.")
+
 
     exit()
 

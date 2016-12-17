@@ -15,10 +15,11 @@ from keras.layers.wrappers import TimeDistributed
 
 
 
-if (len(sys.argv) != 4):
-	print("USAGE: <trainfile> <testfile> <no_epochs>")
+if (len(sys.argv) != 5):
+	print("USAGE: <trainfile> <testfile> <dictionaryfile> <no_epochs>")
 else:
-	fp = open("tokens.txt", "r")
+        # dictionary
+	fp = open(sys.argv[3], "r")
 	data = fp.readlines()
 	dic = {}
 	ctr = 0
@@ -43,7 +44,7 @@ else:
 	fpout = open("output2.txt", "w")
 
 	vocab_size = ctr
-	hm_epochs = int(sys.argv[3])
+	hm_epochs = int(sys.argv[4])
 	n_classes = vocab_size
 	batch_size = 10
 	max_seq_len = 30
@@ -126,7 +127,7 @@ else:
 				y=y.tolist()
 				temp_testx.append(x)
 				temp_testy.append(y)
-				#print("Making in progress: ", (k/n1)*100, end="\r", flush=True)
+				# print("Making in progress: ", (k/n1)*100, end="\r", flush=True)
 			#print(len(temp_testx), len(temp_testx[1]), len(temp_testx[1][1]))
 			trainx = np.asarray(temp_testx)
 			trainy = np.asarray(temp_testy)

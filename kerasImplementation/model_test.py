@@ -14,7 +14,7 @@ from keras.layers.wrappers import TimeDistributed
 
 model = load_model("my_model.h5")
 
-fp = open("tokens.txt", "r")
+fp = open(sys.argv[3], "r")
 data = fp.readlines()
 dic = {}
 ctr = 0
@@ -38,7 +38,7 @@ n32 = len(data32)
 
 
 vocab_size = ctr
-hm_epochs = int(sys.argv[3])
+hm_epochs = int(sys.argv[4])
 n_classes = vocab_size
 batch_size = 10
 max_seq_len = 30

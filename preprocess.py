@@ -154,15 +154,16 @@ def main():
     # Create a file handler for output file
     
     filteredFileName = sys.argv[1][:-4] + "_NoRares.txt"
-    filteredFileName2 = sys.argv[1][:-4] + "_NoRaresOrEntropies.txt"
+    filteredFileName2 = sys.argv[1][:-4] + "_NoRaresOrBugFlags.txt"
     
     fileHandlerOutput = open(filteredFileName, 'w')
     fileHandlerOutput2 = open(filteredFileName2, 'w')
 
     for line in linesFromFile:
         splitLine = line.split()
+        # for element not including \n
         for element in splitLine[:-1]:
-            if (element not in tokensDictionary) and (element not in ["<START_FILE>", "<END_FILE>", "</a>", "<a>"]):
+            if (element not in tokensDictionary) and (element not in ["<START_FILE>", "<END_FILE>", "</a>", "<a>", "0,", "0"]):
                 element = "<RARE_TOKEN>"
             fileHandlerOutput.write(element + " ")
             fileHandlerOutput2.write(element + " ")
